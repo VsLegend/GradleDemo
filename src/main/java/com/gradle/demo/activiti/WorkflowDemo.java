@@ -5,6 +5,7 @@ import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
@@ -25,10 +26,15 @@ public class WorkflowDemo {
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         // 存储服务
         RepositoryService repositoryService = engine.getRepositoryService();
-        // 加载流程定义
-        DeploymentBuilder deploymentBuilder = repositoryService.createDeployment().addClasspathResource("processes/fu.bpmn20.xml");
-        Deployment deploy = deploymentBuilder.deploy();
-        ProcessDefinition definition = repositoryService.createProcessDefinitionQuery().deploymentId(deploy.getId()).singleResult();
+        // 载入流程定义
+        DeploymentBuilder deployment = repositoryService.createDeployment();
+        deployment.addClasspathResource("processes/ask__for_leave.bpmn20.xml");
+        Deployment deploy = deployment.deploy();
+
+
+        // 获取刚刚载入的流程定义
+        ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery().deploymentId(deploy.getId());
+        ProcessDefinition definition = processDefinitionQuery.singleResult();
 
 
         // 运行时服务
@@ -43,7 +49,9 @@ public class WorkflowDemo {
         // 当前task任务
         Task task = taskService.createTaskQuery().processInstanceId(processId).singleResult();
         log.info("当前任务：{}， 任务信息：{}", task.getName(), task.getOwner());
-        taskService.setAssignee(task.getId(), "1");
+        // 设置代理人
+//        taskService.setAssignee(task.getId(), "1");
+        // 设置流程节点需要的参数
         HashMap<String, Object> map = new HashMap<>();
         map.put("day",1);
         taskService.setVariables(task.getId(),map);
