@@ -1,0 +1,58 @@
+// 指定插件
+plugins {
+    // 这里面指定插件与该结构外部使用apply plugin插件作用相同，plugin内部会先执行。
+    id 'java'
+    // spring boot 插件，此处的插件如果当前项目没有依赖，需要导入依赖才可用
+    id 'org.springframework.boot' version('2.4.5')
+}
+
+//apply plugin: 'java'
+/*
+自动依赖管理，Spring相关的所有版本号都由Spring boot的版本号指定
+需要导入spring-boot-gradle-plugin以使用
+ */
+apply plugin: 'io.spring.dependency-management'
+
+
+// 包名 版本
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+
+// 指定java版本
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// 变量定义
+ext {
+
+}
+
+
+repositories {
+    // 本地仓库 用以缓存
+    mavenLocal()
+    // 第三方仓库
+    maven { url "http://192.168.5.16:8081/repository/maven-public/" }
+    maven { url "https://mirrors.huaweicloud.com/repository/maven/" }
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    mavenCentral()
+}
+
+// 依赖管理
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'org.springframework.boot:spring-boot-gradle-plugin:2.4.5'
+    implementation 'org.springframework.boot:spring-boot-starter:2.4.5'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.4.5'
+    // 参数验证
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.5'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.activiti:activiti-spring-boot-starter-basic:6.0.0'
+    implementation 'mysql:mysql-connector-java:6.0.6'
+}
+
+// 配置
+//configurations {
+//    i.exclude module: "spring-boot-starter-tomcat"
+//}
