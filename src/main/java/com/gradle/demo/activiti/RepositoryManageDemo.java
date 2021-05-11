@@ -1,8 +1,6 @@
 package com.gradle.demo.activiti;
 
-import com.gradle.demo.activiti.common.ProcessEngineCreator;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.ProcessEngines;
+import com.gradle.demo.activiti.common.ProcessEngineInstance;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
@@ -17,7 +15,7 @@ public class RepositoryManageDemo {
 
     public static void main(String[] args) {
         // 存储服务
-        RepositoryService repositoryService = ProcessEngineCreator.createRepositoryService();
+        RepositoryService repositoryService = ProcessEngineInstance.createRepositoryService();
         // 载入流程定义
         DeploymentBuilder deployment = repositoryService.createDeployment();
         deployment.addClasspathResource("processes/ask__for_leave.bpmn20.xml");

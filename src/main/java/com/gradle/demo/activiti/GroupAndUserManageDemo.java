@@ -1,9 +1,7 @@
 package com.gradle.demo.activiti;
 
-import com.gradle.demo.activiti.common.ProcessEngineCreator;
+import com.gradle.demo.activiti.common.ProcessEngineInstance;
 import org.activiti.engine.IdentityService;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
 
@@ -15,7 +13,7 @@ import org.activiti.engine.identity.User;
 public class GroupAndUserManageDemo {
 
     public static void main(String[] args) {
-        IdentityService identityService = ProcessEngineCreator.createIdentityService();
+        IdentityService identityService = ProcessEngineInstance.createIdentityService();
         // 创建新的用户组
         Group group = identityService.newGroup("1");
         group.setName("管理组");

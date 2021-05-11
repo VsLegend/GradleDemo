@@ -1,6 +1,6 @@
 package com.gradle.demo.activiti;
 
-import com.gradle.demo.activiti.common.ProcessEngineCreator;
+import com.gradle.demo.activiti.common.ProcessEngineInstance;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.TaskService;
@@ -20,8 +20,8 @@ import java.util.List;
 public class TaskManageDemo {
 
     public static void main(String[] args) {
-        IdentityService identityService = ProcessEngineCreator.createIdentityService();
-        TaskService taskService = ProcessEngineCreator.createTaskService();
+        IdentityService identityService = ProcessEngineInstance.createIdentityService();
+        TaskService taskService = ProcessEngineInstance.createTaskService();
 
 
         Task task = taskService.createTaskQuery().processInstanceId("12501").singleResult();

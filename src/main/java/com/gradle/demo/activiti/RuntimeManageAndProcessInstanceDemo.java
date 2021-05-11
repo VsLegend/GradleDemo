@@ -1,6 +1,6 @@
 package com.gradle.demo.activiti;
 
-import com.gradle.demo.activiti.common.ProcessEngineCreator;
+import com.gradle.demo.activiti.common.ProcessEngineInstance;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -16,8 +16,8 @@ import org.activiti.engine.runtime.ProcessInstance;
 @Slf4j
 public class RuntimeManageAndProcessInstanceDemo {
     public static void main(String[] args) {
-        RepositoryService repositoryService = ProcessEngineCreator.createRepositoryService();
-        RuntimeService runtimeService = ProcessEngineCreator.createRuntimeService();
+        RepositoryService repositoryService = ProcessEngineInstance.createRepositoryService();
+        RuntimeService runtimeService = ProcessEngineInstance.createRuntimeService();
         // 获取刚刚载入的流程定义
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery().deploymentId("7501");
         ProcessDefinition processDefinition = processDefinitionQuery.singleResult();

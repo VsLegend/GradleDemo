@@ -7,14 +7,17 @@ import org.activiti.engine.*;
  * @Time: 2021/5/10
  * @Description: 流程实例创建
  */
-public class ProcessEngineCreator {
+public class ProcessEngineInstance {
+
+    private static final ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();;
+
 
     /**
      * 获取流程引擎
      * @return
      */
     public static ProcessEngine createProcessEngine() {
-        return ProcessEngines.getDefaultProcessEngine();
+        return processEngine;
     }
 
     /**
@@ -22,7 +25,7 @@ public class ProcessEngineCreator {
      * @return
      */
     public static RepositoryService createRepositoryService() {
-        return createProcessEngine().getRepositoryService();
+        return processEngine.getRepositoryService();
     }
 
     /**
@@ -30,7 +33,7 @@ public class ProcessEngineCreator {
      * @return
      */
     public static RuntimeService createRuntimeService() {
-        return createProcessEngine().getRuntimeService();
+        return processEngine.getRuntimeService();
     }
 
     /**
@@ -38,7 +41,7 @@ public class ProcessEngineCreator {
      * @return
      */
     public static TaskService createTaskService() {
-        return createProcessEngine().getTaskService();
+        return processEngine.getTaskService();
     }
 
     /**
@@ -46,7 +49,7 @@ public class ProcessEngineCreator {
      * @return
      */
     public static IdentityService createIdentityService() {
-        return createProcessEngine().getIdentityService();
+        return processEngine.getIdentityService();
     }
 
     /**
@@ -54,7 +57,7 @@ public class ProcessEngineCreator {
      * @return
      */
     public static HistoryService createHistoryService() {
-        return createProcessEngine().getHistoryService();
+        return processEngine.getHistoryService();
     }
 
 }
