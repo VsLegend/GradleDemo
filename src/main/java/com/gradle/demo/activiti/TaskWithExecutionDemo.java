@@ -8,7 +8,6 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.identity.User;
 import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.DeploymentBuilder;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -32,11 +31,12 @@ public class TaskWithExecutionDemo {
         TaskService taskService = ProcessEngineInstance.createTaskService();
         IdentityService identityService = ProcessEngineInstance.createIdentityService();
 
+
         // 部署流程定义
         Deployment deploy = repositoryService.createDeployment().addClasspathResource("processes/ask_for_leave.bpmn20.xml").deploy();
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().deploymentId(deploy.getId()).singleResult();
-
         User user = identityService.createUserQuery().userId("1").singleResult();
+
 
         // 创建一个带有参数的流程实例
         Map<String, Object> variables = new HashMap<>();
