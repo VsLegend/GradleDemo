@@ -26,9 +26,9 @@ public class WorkflowDemo {
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         // 存储服务
         RepositoryService repositoryService = engine.getRepositoryService();
-        // 载入流程定义
+        // 部署后载入流程定义
         DeploymentBuilder deployment = repositoryService.createDeployment();
-        deployment.addClasspathResource("processes/ask__for_leave.bpmn20.xml");
+        deployment.addClasspathResource("processes/ask_for_leave.bpmn20.xml");
         Deployment deploy = deployment.deploy();
 
 
@@ -42,6 +42,7 @@ public class WorkflowDemo {
         // 流程实例
         ProcessInstance processInstance = runtimeService.startProcessInstanceById(definition.getId());
         String processId = processInstance.getId();
+
 
 
         // 任务服务

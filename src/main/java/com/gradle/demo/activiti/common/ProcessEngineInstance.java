@@ -9,7 +9,7 @@ import org.activiti.engine.*;
  */
 public class ProcessEngineInstance {
 
-    private static final ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();;
+    private static final ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
 
     /**
@@ -58,6 +58,10 @@ public class ProcessEngineInstance {
      */
     public static HistoryService createHistoryService() {
         return processEngine.getHistoryService();
+    }
+
+    public static void destroy() {
+        ProcessEngines.destroy();
     }
 
 }
