@@ -3,20 +3,14 @@ server:
 
 spring:
   application:
-    #    与client1服务的名称相同，模拟服务集群
-    name: demo
+    name: gradle and activiti demo
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://129.211.80.218:3306/activiti?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&transformedBitIsBoolean=true&useSSL=false&serverTimezone=UTC
     username: root
     password: Wwangyong@202007
 
-
-
-# 手动配置activiti数据
-activiti:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://129.211.80.218:3306/activiti?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&transformedBitIsBoolean=true&useSSL=false&serverTimezone=UTC
-    username: root
-    password: Wwangyong@202007
+# 所有日志级别，可以用全类型限定某个类的日志级别
+logging:
+  level:
+    root: info

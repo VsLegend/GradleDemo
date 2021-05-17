@@ -11,11 +11,11 @@ import lombok.Data;
 @Data
 public class APIResult<T> {
 
-    private String message;
+    private String message = "";
 
-    private Integer code;
+    private Integer code = 1000;
 
-    private T data;
+    private T data = null;
 
     public APIResult() {
     }
@@ -35,8 +35,8 @@ public class APIResult<T> {
         this.data = data;
     }
 
-    public static <U> APIResult<U> success(Integer code, String message) {
-        return new APIResult<>();
+    public static <U> APIResult<U> success(U data) {
+        return new APIResult<>(data);
     }
 
 

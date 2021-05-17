@@ -41,19 +41,34 @@ repositories {
 
 // 依赖管理
 dependencies {
+    /**
+     * implementation和api是取代之前的compile的，其中api和compile是一样的效果
+     * implementation方式依赖的特点是，将依赖的库文件隐藏在内部，不让外部访问，使用implementation指令的依赖不会传递。
+     * compileonly和provided效果是一样的，只在编译的时候有效， 不参与打包
+     * runtimeOnly 和 apk效果一样，只在打包的时候有效，编译不参与
+     * testImplementation和testCompile效果一样，在单元测试和打包测试apk的时候有效
+     *
+     * annotationProcessor只在编译的时候执行依赖的库，但是库最终不打包到apk中
+     * APT(Annotation Processing Tool)是一种处理注释的工具,它对源代码文件进行检测找出其中的Annotation，根据注解自动生成代码。
+     *
+     */
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation 'org.springframework.boot:spring-boot-gradle-plugin:2.4.5'
     implementation 'org.springframework.boot:spring-boot-starter:2.4.5'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.4.5'
     // 参数验证
     implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.5'
-    implementation 'org.projectlombok:lombok:1.18.20'
     // activiti 框架
     implementation 'org.activiti:activiti-spring-boot-starter-basic:6.0.0'
     // MySQL
     implementation 'mysql:mysql-connector-java:6.0.6'
     // spring boot 配置元数据
-    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.4.5'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.4.5'
+    // swagger3.0
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    compileOnly('org.projectlombok:lombok:1.18.12')
+    annotationProcessor('org.projectlombok:lombok:1.18.2')
 }
 
 // 配置

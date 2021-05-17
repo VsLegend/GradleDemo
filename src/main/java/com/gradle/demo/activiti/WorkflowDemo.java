@@ -28,7 +28,7 @@ public class WorkflowDemo {
         RepositoryService repositoryService = engine.getRepositoryService();
         // 部署后载入流程定义
         DeploymentBuilder deployment = repositoryService.createDeployment();
-        deployment.addClasspathResource("processes/ask_for_leave.bpmn20.xml");
+        deployment.addClasspathResource("processesBackup/ask_for_leave.bpmn20.xml");
         Deployment deploy = deployment.deploy();
 
 
@@ -49,7 +49,7 @@ public class WorkflowDemo {
         TaskService taskService = engine.getTaskService();
         // 当前task任务
         Task task = taskService.createTaskQuery().processInstanceId(processId).singleResult();
-        log.info("当前任务：{}， 任务信息：{}", task.getName(), task.getOwner());
+//        log.info("当前任务：{}， 任务信息：{}", task.getName(), task.getOwner());
         // 设置代理人
 //        taskService.setAssignee(task.getId(), "1");
         // 设置流程节点需要的参数

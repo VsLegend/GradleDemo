@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="GBK" standalone="yes"?>
+<definitions id="file_sequesce" name="GradleDemo"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:yaoqiang="http://bpmn.sourceforge.net"
+             exporter="Yaoqiang BPMN Editor"
+             exporterVersion="5.3"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://sourceforge.net/bpmn/definitions/_1621222059462"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+
+    <process id="sequence_flow" name="sequence_flow" isExecutable="true">
+        <startEvent id="theStart"/>
+
+        <sequenceFlow sourceRef="theStart" targetRef="task1"/>
+
+        <userTask id="task1" name="task1">
+            <documentation>this is task1`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="task1" targetRef="task2"/>
+
+        <userTask id="task2" name="task2">
+            <documentation>this is task2`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="task2" targetRef="task3"/>
+
+        <userTask id="task3" name="task3">
+            <documentation>this is task3`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="task3" targetRef="theEnd"/>
+
+        <endEvent id="theEnd"/>
+    </process>
+
+</definitions>
