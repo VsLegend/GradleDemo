@@ -49,6 +49,13 @@ public class ProcessesController {
     return APIResult.success();
   }
 
+  @ApiOperation(value = "重新激活流程定义")
+  @PutMapping("/activeProcessDefinition/{processDefinitionId}")
+  public APIResult<?> activeProcessDefinition(@PathVariable String processDefinitionId) {
+    repositoryService.activateProcessDefinitionById(processDefinitionId);
+    return APIResult.success();
+  }
+
 
   @ApiOperation(value = "创建一个流程实例")
   @PostMapping("/createProcessInstance/{processDefinitionId}")

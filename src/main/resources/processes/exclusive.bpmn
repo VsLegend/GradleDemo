@@ -35,6 +35,15 @@
         <exclusiveGateway id="exclusiveStart" name="请假天数选择何人审批"/>
 
         <sequenceFlow sourceRef="exclusiveStart" targetRef="leaderApprove">
+            <!--
+            activiti使用UEL表达式
+            UEL表达式支持解析（包括比较）原始类型（primitive）、bean、list、array（数组）与map。
+            值表达式 Value expression: 解析为一个值。默认情况下，所有流程变量都可以使用。（若使用Spring）所有的Spring bean也可以用在表达式里。${myVar}
+            方法表达式 Method expression: 注入一个方法，可以带或不带参数。当注入不带参数的方法时，要确保在方法名后添加空括号（以避免与值表达式混淆）。
+                ${printer.print()}
+                ${myBean.addNewOrder('orderName')}
+                ${myBean.doSomething(myVar, execution)}
+            -->
             <conditionExpression xsi:type="tFormalExpression">
                 ${days le 3}
             </conditionExpression>

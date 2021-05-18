@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions id="parallel_third_xx2" name="parallel_third_xx2"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             targetNamespace="http://activiti.org/bpmn20"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+
+    <process id="parallel_with_no_parallel" name="parallel_with_no_parallel" isExecutable="true">
+        <startEvent id="theStart"/>
+
+        <sequenceFlow sourceRef="theStart" targetRef="fake_parallel_start"/>
+        <userTask id="fake_parallel_start" name="fake parallel start"/>
+
+        <sequenceFlow sourceRef="fake_parallel_start" targetRef="parallel_task_a"/>
+        <userTask id="parallel_task_a" name="Parallel Task A">
+            <documentation>this is taskA`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="fake_parallel_start" targetRef="parallel_task_b"/>
+        <userTask id="parallel_task_b" name="Parallel Task B">
+            <documentation>this is taskB`s documentation</documentation>
+        </userTask>
+
+
+        <sequenceFlow sourceRef="parallel_task_a" targetRef="parallel_task_c"/>
+        <sequenceFlow sourceRef="parallel_task_b" targetRef="parallel_task_c"/>
+        <userTask id="parallel_task_c" name="Parallel Task C">
+            <documentation>this is taskC`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="parallel_task_c" targetRef="theEnd"/>
+        <endEvent id="theEnd"/>
+    </process>
+
+</definitions>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions id="include_xx1" name="GradleDemo"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             targetNamespace="http://activiti.org/bpmn20"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+
+    <process id="include_first" name="include_first" isExecutable="true">
+        <!--
+        包容网关可被视作排他网关与并行网关的组合。
+        与排他网关一样，可以在出口顺序流上定义条件，包容网关会计算它们。然而主要的区别是，包容网关与并行网关一样，可以选择多于一条（出口）顺序流。
+        包容网关不需要“平衡”（也就是说，对应的包容网关，其入口/出口顺序流的数量不需要匹配）。
+        包容网关会简单地等待所有入口顺序流，并为每一条出口顺序流创建并行执行，不受流程模型中的其他结构影响。
+        -->
+        <startEvent id="theStart"/>
+
+        <sequenceFlow sourceRef="theStart" targetRef="include_start"/>
+        <inclusiveGateway id="include_start" name="parallel start" default="include_1"/>
+
+        <sequenceFlow id="include_1" sourceRef="include_start" targetRef="include_task_a">
+            <conditionExpression xsi:type="tFormalExpression">
+
+            </conditionExpression>
+        </sequenceFlow>
+        <userTask id="include_task_a" name="Include Task A">
+            <documentation>this is taskA`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="include_start" targetRef="include_task_b">
+            <conditionExpression xsi:type="tFormalExpression">
+
+            </conditionExpression>
+        </sequenceFlow>
+        <userTask id="include_task_b" name="Include Task B">
+            <documentation>this is taskB`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="include_start" targetRef="include_task_c">
+            <conditionExpression xsi:type="tFormalExpression">
+
+            </conditionExpression>
+        </sequenceFlow>
+        <userTask id="include_task_c" name="Include Task C">
+            <documentation>this is taskC`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="include_task_a" targetRef="include_end"/>
+        <sequenceFlow sourceRef="include_task_b" targetRef="include_end"/>
+        <sequenceFlow sourceRef="include_task_c" targetRef="include_end"/>
+        <inclusiveGateway id="include_end" name="include end"/>
+
+        <sequenceFlow sourceRef="include_end" targetRef="theEnd"/>
+        <endEvent id="theEnd"/>
+    </process>
+
+</definitions>
