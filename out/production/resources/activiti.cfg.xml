@@ -6,12 +6,16 @@
 
     <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
         <!-- 数据库连接配置 -->
-        <property name="jdbcUrl" value="jdbc:mysql://129.211.80.218:3306/activiti?useSSL=false"/>
+        <property name="jdbcUrl" value="jdbc:mysql://129.211.80.218:3306/activiti?characterEncoding=UTF-8&amp;useSSL=false"/>
         <property name="jdbcDriver" value="com.mysql.cj.jdbc.Driver"/>
         <property name="jdbcUsername" value="root"/>
         <property name="jdbcPassword" value="Wwangyong@202007"/>
         <!-- 建表策略 ,true表示当表不存在时，自动创建表，共28张表 -->
         <property name="databaseSchemaUpdate" value="true"/>
+        <!-- 字体设置-->
+        <property name="activityFontName" value="宋体"/>
+        <property name="labelFontName" value="宋体"/>
+        <property name="annotationFontName" value="宋体"/>
     </bean>
 
 

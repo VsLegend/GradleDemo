@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions id="parallel_first_xx1" name="GradleDemo"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             targetNamespace="http://activiti.org/bpmn20"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+
+    <process id="parallel_first" name="parallel_first" isExecutable="true">
+        <!--
+        并行网关不计算条件。如果连接到并行网关的顺序流上定义了条件，条件会被简单地忽略。
+        并行网关不需要“平衡”（也就是说，对应的并行网关，其入口/出口顺序流的数量不需要匹配）。
+        并行网关会简单地等待所有入口顺序流，并为每一条出口顺序流创建并行执行，不受流程模型中的其他结构影响。
+        -->
+        <startEvent id="theStart"/>
+
+        <sequenceFlow sourceRef="theStart" targetRef="parallel_start"/>
+        <parallelGateway id="parallel_start" name="parallel start"/>
+
+        <sequenceFlow sourceRef="parallel_start" targetRef="parallel_task_a"/>
+        <userTask id="parallel_task_a" name="Parallel Task A">
+            <documentation>this is taskA`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="parallel_start" targetRef="parallel_task_b"/>
+        <userTask id="parallel_task_b" name="Parallel Task B">
+            <documentation>this is taskB`s documentation</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="parallel_task_a" targetRef="parallel_end"/>
+        <sequenceFlow sourceRef="parallel_task_b" targetRef="parallel_end"/>
+        <parallelGateway id="parallel_end" name="parallel end"/>
+
+        <sequenceFlow sourceRef="parallel_end" targetRef="theEnd"/>
+        <endEvent id="theEnd"/>
+    </process>
+
+</definitions>

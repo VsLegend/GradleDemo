@@ -35,12 +35,19 @@ public class APIResult<T> {
         this.data = data;
     }
 
+    public static <U> APIResult<U> success() {
+        return new APIResult<>();
+    }
+
     public static <U> APIResult<U> success(U data) {
         return new APIResult<>(data);
     }
 
-
     public static <U> APIResult<U> failed(Integer code, String message) {
         return new APIResult<>(code, message);
+    }
+
+    public static <U> APIResult<U> failed(String message) {
+        return new APIResult<>(9999, message);
     }
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions id="xor_firsrt-xxx1" name="GradleDemo"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             targetNamespace="http://activiti.org/bpmn20"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+
+    <process id="xor-flow" name="xor-flow" isExecutable="true">
+        <!--
+        使用排他网关时，只会选择一条顺序流。当多条顺序 流的条件都计算为true时，
+        其中在XML中定义的第一条（也只有这条）会被选择，用于继续流程。如果没有可选的顺序流，会抛出异常。
+        -->
+        <startEvent id="theStart"/>
+
+        <sequenceFlow sourceRef="theStart" targetRef="userVacationApply"/>
+        <userTask id="userVacationApply" name="请假申请">
+            <documentation>员工请假申请说明书。</documentation>
+            <extensionElements>
+                <activiti:formProperty id="userName" name="请假人" type="string"/>
+                <activiti:formProperty id="startDate" name="请假开始时间（yyyy-MM-dd hh:mm）" type="date"
+                                       datePattern="yyyy-MM-dd hh:mm" required="true"/>
+                <activiti:formProperty id="endDate" name="请假结束时间（yyyy-MM-dd hh:mm）" type="date"
+                                       datePattern="yyyy-MM-dd hh:mm" required="true"/>
+            </extensionElements>
+        </userTask>
+
+        <!-- 排他节点找不到出口时报错，即多个分支的条件没有一条满足-->
+        <sequenceFlow sourceRef="userVacationApply" targetRef="exclusiveStart"/>
+        <exclusiveGateway id="exclusiveStart" name="请假天数选择何人审批"/>
+
+        <sequenceFlow sourceRef="exclusiveStart" targetRef="leaderApprove">
+            <conditionExpression xsi:type="tFormalExpression">
+                ${days le 3}
+            </conditionExpression>
+        </sequenceFlow>
+        <userTask id="leaderApprove" name="领导审批">
+            <documentation>${userName} 申请请假 ${days}天。</documentation>
+            <extensionElements>
+                <activiti:formProperty id="approve" name="是否同意该请假审批" type="enum"
+                                       required="true">
+                    <activiti:value id="true" name="Approve"/>
+                    <activiti:value id="false" name="Reject"/>
+                </activiti:formProperty>
+                <activiti:formProperty id="leaderName" name="审核领导" type="string"/>
+            </extensionElements>
+        </userTask>
+
+        <sequenceFlow sourceRef="exclusiveStart" targetRef="headLeaderApprove">
+            <conditionExpression xsi:type="tFormalExpression">
+                ${days gt 3}
+            </conditionExpression>
+        </sequenceFlow>
+        <userTask id="headLeaderApprove" name="总监审批">
+            <documentation>${userName} 申请请假 ${days}天。需要总监审批。</documentation>
+            <extensionElements>
+                <activiti:formProperty id="approve" name="是否同意该请假审批" type="enum"
+                                       required="true">
+                    <activiti:value id="true" name="Approve"/>
+                    <activiti:value id="false" name="Reject"/>
+                </activiti:formProperty>
+                <activiti:formProperty id="leaderName" name="审核领导" type="string"/>
+            </extensionElements>
+        </userTask>
+
+        <sequenceFlow sourceRef="leaderApprove" targetRef="dealApproveResult"/>
+        <sequenceFlow sourceRef="headLeaderApprove" targetRef="dealApproveResult"/>
+
+        <userTask id="dealApproveResult" name="请假人确认结果">
+            <documentation>${leaderName} 审批，审批结果：${approve}</documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="dealApproveResult" targetRef="theEnd"/>
+        <endEvent id="theEnd"/>
+    </process>
+
+</definitions>

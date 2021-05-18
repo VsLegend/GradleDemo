@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GBK" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <definitions id="file_sequesce" name="GradleDemo"
              xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
              xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"

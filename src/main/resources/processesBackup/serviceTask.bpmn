@@ -33,13 +33,13 @@
       <bpmndi:BPMNShape bpmnElement="_4" id="Yaoqiang-_4">
         <dc:Bounds height="32.0" width="32.0" x="489.2113782321408" y="373.4524656354336"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="21.02" width="54.0" x="478.21" y="412.9"/>
+          <dc:Bounds height="21.02" width="54.0" x="478.21" y="412.86"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_2" id="Yaoqiang-_2">
         <dc:Bounds height="32.0" width="32.0" x="135.49999999999997" y="376.49999999999994"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="21.02" width="59.0" x="122.0" y="415.95"/>
+          <dc:Bounds height="21.02" width="59.0" x="122.0" y="415.91"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_7" id="Yaoqiang-_7">
