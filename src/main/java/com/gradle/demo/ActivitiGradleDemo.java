@@ -3,8 +3,6 @@ package com.gradle.demo;
 import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
@@ -18,8 +16,8 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @SpringBootApplication(exclude = {
         SecurityAutoConfiguration.class
 })
-public class GradleDemo {
+public class ActivitiGradleDemo {
     public static void main(String[] args) {
-        SpringApplication.run(GradleDemo.class, args);
+        SpringApplication.run(ActivitiGradleDemo.class, args);
     }
 }
