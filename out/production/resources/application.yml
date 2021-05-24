@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: gradle and activiti demo
+    name: activiti-gradle-demo
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://129.211.80.218:3306/activiti?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&transformedBitIsBoolean=true&useSSL=false&serverTimezone=UTC

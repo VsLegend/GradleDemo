@@ -58,6 +58,7 @@ public class TaskWithExecutionDemo {
 //                task.getId(), task.getName(), task.getProcessInstanceId()
 //        ));
         Task task = taskList.get(0);
+
         taskService.setOwner(task.getId(), user.getId());
 
 
@@ -80,6 +81,8 @@ public class TaskWithExecutionDemo {
         taskVariables.put("vacationApproved", "false");
         taskVariables.put("managerMotivation", "We have a tight deadline!");
         taskService.complete(task.getId(), taskVariables);
+
+
 
 
     }
